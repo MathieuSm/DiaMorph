@@ -1,0 +1,14 @@
+scanner ID:                 6507
+scaning time in ms:         1000.0
+scaning time in ms:         1000.0
+Energy in keV:              70.0
+Current in muA:             200
+nb X pixel:                 1024
+nb Y pixel:                 1024
+nb Z pixel:                 816
+resolution general X in mu: 15155
+resolution general Y in mu: 15155
+resolution general Z in mu: 12076
+pixel resolution X in mu:   14.80
+pixel resolution Y in mu:   14.80
+pixel resolution Z in mu:   14.80
