@@ -43,7 +43,7 @@ def Main(Arguments):
     Scan, AdditionalData = ISQReader.Main(Arguments)
     Toc = time.time()
     Utils.PrintTime(Tic, Toc)
-    Utils.ShowSlice(Scan)
+    Utils.ShowSlice(Scan,Axis='Z')
 
     return
 
