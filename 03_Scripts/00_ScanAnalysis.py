@@ -43,9 +43,43 @@ def Main(Arguments):
     Scan, AdditionalData = ISQReader.Main(Arguments)
     Toc = time.time()
     Utils.PrintTime(Tic, Toc)
-    Utils.ShowSlice(Scan,Axis='Z')
+    Utils.ShowSlice(Scan)
 
     return
+
+#%% Tests to reshape
+
+import matplotlib.pyplot as plt
+
+Step = 1024*1024
+Build = np.zeros((816,1024,1024))
+
+for i in range(Build.shape[0]):
+
+    VM = VoxelModel[i*Step:(i+1)*Step].reshape((1024,1024))
+    Build[i] = np.roll(VM, shift=-4*i, axis=0)
+
+Figure, Axis = plt.subplots(1,1)
+Axis.imshow(Build[400])
+plt.show()
+
+#%% Tests to rebuild
+
+# Build = VM.copy()
+
+for i in range(Build.shape[0]):
+    for j in range(Build.shape[1]):
+        Build[i,j:] = np.roll(Build[i,j:],shift=-4, axis=1)
+
+Array = np.roll(Build, shift=(-750,50), axis=(2,1))
+
+#%%
+Figure, Axis = plt.subplots(1,1)
+Axis.imshow(Array[800])
+plt.show()
+
+#%%
+ISQReader.WriteMHD(Array,AdditionalData,Arguments.od,Arguments.File[:-4],'float')
 
 #%%
 if __name__ == '__main__':
