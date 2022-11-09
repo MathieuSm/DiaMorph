@@ -262,7 +262,8 @@ def Main(Arguments):
 
         VoxelModel = VoxelModel.reshape((NDim[2], NDim[1], NDim[0]))
         # the image is flipped by the Offset --> change the order to obtain the continuous image:
-        VoxelModel = np.c_[VoxelModel[:, :, -Offset:-1], VoxelModel[:, :, :(VoxelModel.shape[2] - Offset)]]
+        VoxelModel = np.c_[VoxelModel[:, :, -Offset:], VoxelModel[:, :, :(VoxelModel.shape[2] - Offset)]]
+
 
     if Echo:
         print('     -> reshape data in     : %8.2f sec\n' % (Time3 - Time2))
