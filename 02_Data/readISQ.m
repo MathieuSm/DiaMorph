@@ -1,6 +1,5 @@
-ISQ = ReadISQ('C0019219_1.ISQ')
 
-function [image,metadata]=ReadISQ(filename,slicerange,window,progress)
+% function [image,metadata]=ReadISQ(filename,slicerange,window,progress)
 
 
 % [image]=readISQ(filename) reads the image in the file
@@ -19,6 +18,8 @@ function [image,metadata]=ReadISQ(filename,slicerange,window,progress)
 % 
 % See also http://www.scanco.ch/en/support/customer-login/faq-customers/faq-customers-general.html
 
+
+filename = 'C0019219_1.ISQ'
 fid=fopen(filename);
 %h=fread(fid,128,'int'); % header
 h=fread(fid,32,'int'); % header
@@ -37,27 +38,13 @@ metadata.mu_scaling=h(23);
 
 metadata.name=char(fread(fid,40,'char*1')'); % header
 
-if nargin<2 | isempty(slicerange);
-    first_slice=1;
-    last_slice=metadata.dimz_p;
-elseif length(slicerange)==1 & slicerange==0;
-    first_slice=0;
-    last_slice=-1;
-    image=[];
-elseif length(slicerange)==1;
-    first_slice=slicerange;
-    last_slice=slicerange;
-else
-    first_slice=slicerange(1);
-    last_slice=slicerange(2);
-end
-if nargin<3 | isempty(window);
-    window=[1,metadata.dimx_p,1,metadata.dimy_p];
-end
-if nargin<4;
-    progress=0;
-end
+%%
+first_slice=1;
+last_slice=metadata.dimz_p;
+window=[1,metadata.dimx_p,1,metadata.dimy_p];
+progress=1;
 
+%%
 %image=zeros(window(2)-window(1)+1,window(4)-window(3)+1,last_slice-first_slice+1);
 if progress 
     wb=waitbar(0,'Loading image data');
@@ -75,4 +62,3 @@ if progress;
 end
 fclose(fid);
    
-end
