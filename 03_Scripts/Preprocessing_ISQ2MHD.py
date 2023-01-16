@@ -22,16 +22,6 @@ Description = """
     """
 
 #%%
-# For testing purpose
-class ArgumentsClass:
-
-    def __init__(self):
-        self.File = 'Example.ISQ'
-        return
-
-Arguments = ArgumentsClass()
-
-#%%
 def Main(Arguments):
 
     ProcessTiming(1, 'Convert ISQs to MHDs')
@@ -42,9 +32,9 @@ def Main(Arguments):
 
     # If provided analyse 1 specific file only
     # Otherwise list all ISQ files present in Data directory (DD)
-    try:
+    if Arguments.File:
         Files = [Arguments.File]
-    except:
+    else:
         Files = [File for File in os.listdir(str(DD)) if File.endswith('.ISQ')]
 
     # For each listed file
@@ -56,7 +46,7 @@ def Main(Arguments):
         # Create corresponding sample folder and write MHD
         os.makedirs(str(MHD_Dir / File[:-4]), exist_ok=True)
 
-        FileName = str(MHD_Dir / File[:-4] / File)
+        FileName = str(MHD_Dir / File[:-4] / File[:-4])
         Write.MHD(ISQ, FileName)
 
         # Update progress
