@@ -474,7 +474,7 @@ def WriteMHD(Image, FileName, PixelType='uint', Echo=False):
 
     return
 
-#%%
+#%% Main function
 def Main(Arguments):
 
     ProcessTiming(1, 'Convert ISQs to MHDs')
