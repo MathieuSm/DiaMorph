@@ -1,0 +1,77 @@
+\documentclass{article}
+\usepackage[english]{babel}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage{wrapfig}
+
+\title{DIAMORPH Project\\Convert ISQ to MHD}
+
+\author{Mathieu Simon}
+
+\setlength\parindent{0pt}
+
+\begin{document}
+	\maketitle
+	This short document is intended to explain how to use the python script\\ \texttt{Preprocessing\_ISQ2MHD.py} and what it does exactly.
+	
+	\section{Why python}
+	Python is a programming language that lets you work quickly and perform data analysis more effectively [www.python.org]. It is open source and freely available on most platforms (Linux, Windows, Mac, etc...).\\[1ex]
+	
+	One way to use python is to install anaconda\\
+	https://www.anaconda.com/products/distribution\\
+	or more detailed\\
+	https://docs.anaconda.com/anaconda/install\\[1ex]
+	
+	Anaconda comes together with python and allows to manage \textbf{virtual environments} (VEs). VE is like an isolated container that can be customed to install specific \textbf{packages / libraries / modules} for a given project. Packages are scripts developped to execute specific tasks. These packages are imported in the project script and called to execute tasks. VEs allow to have all those packages into 1 place and facilitate sharing and reproducibility of analysis.
+	
+	\newpage
+	\section{Virtual environment}
+	After installation of Anaconda, a virtual environment can be created using the Anaconda Navigator. The steps are the following:
+	
+	\begin{enumerate}
+		\item Start Anaconda Navigator
+		\item Go to the "Environment" tab on the left
+		\item Create a new environment using the "Import" button on the bottom
+		\item Click on the folder icon on the right, next to the "Local drive" field (see Figure 1)
+		\item Select the "Requirements.yaml" file
+	\end{enumerate}
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=\linewidth]{F1}
+		\caption{Create a virtual environment with Anaconda Navigator}
+		\label{F1}
+	\end{figure}
+	
+	\section{Project structure}
+
+	The preprocessing script expect the following folder structure:
+	
+	\begin{itemize}
+		\item "\texttt{01\_Admin}" contains administrative matters
+		\item "\texttt{02\_Data}" contains the ISQ files, without the ";1" versioning
+		\item "\texttt{03\_Scripts}" contains the scripts used for the project
+		\item "\texttt{04\_Results}" contains the scripts outputs
+	\end{itemize}
+	
+	\section{AIM to MHD}
+	To run the analysis script, activate the "DIAMORPH" environment using Anaconda Navigator (it should be activate automatically after creation). Then, you can start any integrated development environment (IDE) from the Anaconda Navigator "Home" tab (e.g. PyCharm, VSCode, Spyder, etc..) and start editing and/or running the script. Here the example is shown using VSCode.\\[1ex]
+	
+	After opening the IDE, open the project folder and open the  \texttt{Preprocessing\_ISQ2MHD.py} script. Run it using the "Play" button. If everything went well, the conversion should run for about few seconds per sample and end up with the message: "Files converted!", see Figure \ref{F3}.
+	
+	The analysis is performed as follow:
+	\begin{enumerate}
+		\item If no specific file is given, list all the ".ISQ" files in the \texttt{02\_Data} folder
+		\item Read each file, create a \texttt{00\_Preprocessing} folder into \texttt{04\_Results}
+		\item Write the converted ".mhd" file into the created folder
+	\end{enumerate}
+
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.8\linewidth]{F3}
+		\caption{Graphical interface of VScode}
+		\label{F3}
+	\end{figure}
+
+\end{document}
